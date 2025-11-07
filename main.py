@@ -5,9 +5,8 @@ def solicitar_lista_palavras():
     quantidade_palavras = int(input("\nInsira a quantidade de palavras (mín 10): "))
     print()
     
-    if quantidade_palavras < 10:
-        while quantidade_palavras < 10:
-            quantidade_palavras = int(input("Quantidade inferior a necessária! Insira outro valor (mín 10): "))
+    while quantidade_palavras < 10:
+        quantidade_palavras = int(input("Quantidade inferior a necessária! Insira outro valor (mín 10): "))
     
     for i in range (quantidade_palavras):
         lista_palavras.append(input(f"Insira a {i+1}° palavra: "))   
