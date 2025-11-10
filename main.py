@@ -14,7 +14,7 @@ def request_words_list():
     return words_list
 
 
-def draw_word(words_list):
+def request_word_draw(words_list):
     list_size = len(words_list)
     drawn_index = random.randint(0, list_size-1)
     drawn_word = words_list[drawn_index]
@@ -22,7 +22,7 @@ def draw_word(words_list):
     return drawn_word
 
 
-def scramble_word(drawn_word):
+def request_word_scramble(drawn_word):
     characters = []
     for i in drawn_word:
         characters.append(i)
@@ -73,8 +73,8 @@ def jogar(drawn_word, scrambled_word):
 print("======= Scrambled Word Game =======")
 
 words_list = request_words_list()
-drawn_word = draw_word(words_list)
-scrambled_word = scramble_word(drawn_word)
+drawn_word = request_word_draw(words_list)
+scrambled_word = request_word_scramble(drawn_word)
 ganhou = jogar(drawn_word, scrambled_word)
 
 if not ganhou:
