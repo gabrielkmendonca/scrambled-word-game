@@ -1,82 +1,82 @@
 import random
 
-def solicitar_lista_palavras():
-    lista_palavras = []
-    quantidade_palavras = int(input("\nInsira a quantidade de palavras (mín 10): "))
+def request_words_list():
+    words_list = []
+    words_quantity = int(input("\nEnter the number of words (mín 10): "))
     print()
     
-    while quantidade_palavras < 10:
-        quantidade_palavras = int(input("Quantidade inferior a necessária! Insira outro valor (mín 10): "))
+    while words_quantity < 10:
+        words_quantity = int(input("Less than needed! Please enter a different value. (mín 10): "))
     
-    for i in range (quantidade_palavras):
-        lista_palavras.append(input(f"Insira a {i+1}° palavra: "))   
+    for i in range (words_quantity):
+        words_list.append(input(f"Enter the {i+1}° word: "))   
 
-    return lista_palavras
-
-
-def sortear_palavra(lista_palavras):
-    tamanho_lista = len(lista_palavras)
-    indice_sorteado = random.randint(0, tamanho_lista-1)
-    palavra_sorteada = lista_palavras[indice_sorteado]
-
-    return palavra_sorteada
+    return words_list
 
 
-def embaralhar_palavra(palavra_sorteada):
-    caracteres = []
-    for i in palavra_sorteada:
-        caracteres.append(i)
+def draw_word(words_list):
+    list_size = len(words_list)
+    drawn_index = random.randint(0, list_size-1)
+    drawn_word = words_list[drawn_index]
 
-    n = len(caracteres)
+    return drawn_word
 
-    total_trocas = 2 * n -1
-    contador_trocas = 0
 
-    while contador_trocas < total_trocas:
+def scramble_word(drawn_word):
+    characters = []
+    for i in drawn_word:
+        characters.append(i)
+
+    n = len(characters)
+
+    total_shuffles = 2 * n -1
+    counter = 0
+
+    while counter < total_shuffles:
         i = random.randint(0, n - 1)
         j = random.randint(0, n - 1)
 
         if i != j:
-            sup = caracteres[i]
-            caracteres[i] = caracteres[j]
-            caracteres[j] = sup
-            contador_trocas += 1
+            sup = characters[i]
+            characters[i] = characters[j]
+            characters[j] = sup
+            counter += 1
         else:
             continue
 
-    palavra_embaralhada = ""
-    for letra in caracteres:
-        palavra_embaralhada += letra
+    scrambled_word = ""
+    for letter in characters:
+        scrambled_word += letter
 
-    return palavra_embaralhada
+    return scrambled_word
 
 
-def jogar(palavra_sorteada, palavra_embaralhada):
-    total_tentativas = 7
-    tentativa_atual = 1
+def jogar(drawn_word, scrambled_word):
+    total_attempts = 7
+    current_attempt = 1
 
-    print(f"\nA palavra embaralhada é: {palavra_embaralhada}")
-    print("Você possui 7 tentativas ao todo. Boa sorte!\n")
+    print(f"\nThe scrambled word is: {scrambled_word}")
+    print("You have 7 attempts. Good Luck!\n")
 
-    while tentativa_atual <= total_tentativas:
-        palpite = input(f"Tentativa {tentativa_atual}/{total_tentativas} -> Digite seu palpite: ").strip()
+    while current_attempt <= total_attempts:
+        guess = input(f"Attempt {current_attempt}/{total_attempts} -> Enter your guess: ").strip()
 
-        if palpite.lower() == palavra_sorteada.lower():
-            print("\n🏆 Parabéns! Você acertou a palavra!")
+        if guess.lower() == drawn_word.lower():
+            print("\n🏆 Congratulations! You guessed the word correctly!")
             return True
         else:
-            print("Palavra incorreta! Tente novamente. \n")
-            tentativa_atual += 1
+            print("Wrong word! Try again. \n")
+            current_attempt += 1
 
     return False
 
-print("======= Jogo da Palavra Embaralhada =======")
+print("======= Scrambled Word Game =======")
 
-lista_palavras = solicitar_lista_palavras()
-palavra_sorteada = sortear_palavra(lista_palavras)
-palavra_embaralhada = embaralhar_palavra(palavra_sorteada)
-ganhou = jogar(palavra_sorteada, palavra_embaralhada)
+words_list = request_words_list()
+drawn_word = draw_word(words_list)
+scrambled_word = scramble_word(drawn_word)
+ganhou = jogar(drawn_word, scrambled_word)
 
 if not ganhou:
-    print("\n☠️  GAME OVER! Você não acertou a palavra.")
-    print(f"A palavra era: {palavra_sorteada}")
+    print("\n☠️  GAME OVER! You didn't get the word right.")
+    print(f"The word was: {drawn_word}")
